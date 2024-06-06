@@ -1,0 +1,11 @@
+name: GITHUB_OUTPUT
+on: push
+jobs:
+  share:
+    runs-on: ubuntu-latest
+    steps:
+      - id: source # <step_id>を設定
+        run: echo "result=Hello" >> "${GITHUB_OUTPUT}" # GITHUB_OUTPUTへ"<key>=<value>"で書き出し
+      - env:
+          RESULT: ${{ steps.source.outputs.result }} # stepsコンテキストからsteps.<step_id>.outputs.<key>で参照
+        run: echo "${RESULT}"
